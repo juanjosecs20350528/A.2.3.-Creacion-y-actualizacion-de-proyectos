@@ -34,6 +34,13 @@ def guardar_datos():
     collection.insert_one(datos)
     messagebox.showinfo("Éxito", "Los datos se han guardado correctamente en la base de datos.")
 
+   # Función para mostrar una ventana de confirmación antes de cancelar
+def confirmar_cancelar():
+    respuesta = messagebox.askyesno("Confirmar", "¿Estás seguro de que deseas cancelar?")
+    if respuesta:
+        ventana.destroy()  # Cierra la ventana principal si el usuario confirma la cancelación
+
+
 # Crear la ventana principal
 ventana = Tk()
 ventana.title("Formulario de trabajo")
@@ -115,10 +122,12 @@ Label(ventana, text="Estatus:").grid(row=17, column=0)
 entry_estatus = Entry(ventana)
 entry_estatus.grid(row=17, column=1)
 
-# Continuar con las etiquetas y campos de entrada para los demás datos...
 
 # Botón para guardar los datos
-Button(ventana, text="Guardar", command=guardar_datos).grid(row=20, columnspan=2)
+Button(ventana, text="Guardar", command=guardar_datos).grid(row=20, columnspan=1)
+
+# Botón para cancelar
+Button(ventana, text="Cancelar", command=confirmar_cancelar).grid(row=20, column=2)
 
 # Ejecutar el bucle principal
 ventana.mainloop()
